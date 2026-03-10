@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gurveender Jeet Kaur — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #f0ebe1;
+    --cream-dark: #e4ddd0;
+    --warm-dark: #2c2417;
+    --warm-mid: #5c4a32;
+    --accent: #b87333;
+    --accent-light: #d4956a;
+    --text: #3a2e1e;
+    --text-muted: #7a6a52;
+    --card-bg: #ece6d9;
+    --card-border: #d6cdb8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(240,235,225,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--warm-dark); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-muted);
+    font-size: 0.82rem; font-weight: 400; letter-spacing: 0.09em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 8rem 4rem 4rem; gap: 4rem;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 1.2rem;
+    padding: 0.35rem 0.9rem; border: 1px solid var(--accent-light); border-radius: 2rem;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    line-height: 1.05; font-weight: 900; color: var(--warm-dark); margin-bottom: 1.5rem;
+  }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-desc { font-size: 1rem; line-height: 1.85; color: var(--text-muted); max-width: 480px; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.85rem 2rem; background: var(--warm-dark); color: var(--cream);
+    text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em;
+    border-radius: 0.25rem; transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 0.85rem 2rem; border: 1.5px solid var(--warm-mid); color: var(--warm-mid);
+    text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em;
+    border-radius: 0.25rem; transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-right { display: flex; justify-content: center; align-items: center; }
+  .photo-frame { width: 360px; height: 440px; position: relative; }
+  .photo-frame::before {
+    content: ''; position: absolute; top: 16px; left: 16px;
+    width: 100%; height: 100%; border: 2px solid var(--accent); border-radius: 0.5rem; z-index: 0;
+  }
+  .photo-wrap {
+    width: 100%; height: 100%; border-radius: 0.5rem; overflow: hidden;
+    position: relative; z-index: 1; border: 1.5px solid var(--card-border);
+  }
+  .photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ── SECTION ── */
+  section { padding: 6rem 4rem; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--warm-dark); line-height: 1.15; margin-bottom: 1rem; }
+  .section-line { width: 3rem; height: 2px; background: var(--accent); margin-bottom: 3rem; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--cream-dark); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+  .about-text { font-size: 1rem; line-height: 1.9; color: var(--text-muted); }
+  .about-text p + p { margin-top: 1rem; }
+  .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+  .highlight-card { background: var(--cream); border: 1px solid var(--card-border); border-radius: 0.5rem; padding: 1.2rem; }
+  .highlight-card .num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent); font-weight: 700; }
+  .highlight-card p { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  /* CV button */
+  .cv-btn {
+    margin-top: 2rem; display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.8rem 1.6rem; background: var(--warm-dark); color: var(--cream);
+    border: none; border-radius: 0.25rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em;
+    cursor: pointer; transition: background 0.3s, transform 0.2s;
+  }
+  .cv-btn:hover { background: var(--accent); transform: translateY(-2px); }
+  .cv-btn svg { width: 16px; height: 16px; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--cream); }
+  .skills-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .skill-group-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--warm-dark); margin-bottom: 1.5rem; font-weight: 700; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .skill-tag {
+    padding: 0.5rem 1.1rem; border: 1.5px solid var(--card-border);
+    border-radius: 2rem; font-size: 0.82rem; color: var(--warm-mid); background: var(--card-bg);
+    transition: all 0.25s; cursor: default;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+  .skill-tag.accent { background: var(--warm-dark); color: var(--cream); border-color: var(--warm-dark); }
+  .skill-tag.accent:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--cream-dark); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--cream); border: 1px solid var(--card-border);
+    border-radius: 0.5rem; overflow: hidden;
+    cursor: pointer; display: flex; flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .project-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(44,36,23,0.14); }
+  .project-img {
+    width: 100%; aspect-ratio: 16/9;
+    overflow: hidden; flex-shrink: 0;
+    position: relative;
+  }
+  .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .project-card:hover .project-img img { transform: scale(1.05); }
+  .project-img-overlay {
+    position: absolute; inset: 0;
+    background: rgba(44,36,23,0);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s;
+  }
+  .project-card:hover .project-img-overlay { background: rgba(44,36,23,0.3); }
+  .overlay-text {
+    color: var(--cream); font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0; transition: opacity 0.3s; padding: 0.5rem 1rem;
+    border: 1px solid rgba(240,235,225,0.5); border-radius: 2rem;
+  }
+  .project-card:hover .overlay-text { opacity: 1; }
+
+  .project-body { padding: 1.3rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .project-type { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.35rem; }
+  .project-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--warm-dark); font-weight: 700; line-height: 1.3; }
+  .project-tags-small { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.7rem; }
+  .project-tag-small {
+    padding: 0.18rem 0.6rem; font-size: 0.68rem;
+    background: var(--cream-dark); color: var(--text-muted);
+    border-radius: 2rem; border: 1px solid var(--card-border);
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(26,18,8,0.75); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--cream); border-radius: 0.75rem;
+    max-width: 820px; width: 100%; max-height: 90vh;
+    overflow-y: auto; position: relative;
+    box-shadow: 0 32px 80px rgba(26,18,8,0.35);
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .modal-close {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    width: 36px; height: 36px; background: var(--card-bg);
+    border: 1px solid var(--card-border); border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: var(--text-muted); z-index: 10;
+    transition: background 0.2s, color 0.2s;
+  }
+  .modal-close:hover { background: var(--warm-dark); color: var(--cream); }
+
+  /* Project modal */
+  .project-modal-img {
+    width: 100%; aspect-ratio: 16/9; overflow: hidden;
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
+  .project-modal-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .project-modal-body { padding: 2rem 2.2rem 2.5rem; }
+  .project-modal-type { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+  .project-modal-name { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--warm-dark); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
+  .project-modal-desc { font-size: 0.95rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .project-modal-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
+  .project-modal-tag {
+    padding: 0.3rem 0.9rem; font-size: 0.78rem;
+    background: var(--card-bg); color: var(--warm-mid);
+    border-radius: 2rem; border: 1px solid var(--card-border);
+  }
+  .project-modal-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.8rem; background: var(--warm-dark); color: var(--cream);
+    text-decoration: none; border-radius: 0.25rem;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em;
+    transition: background 0.3s;
+  }
+  .project-modal-link:hover { background: var(--accent); }
+  .project-modal-link.disabled { background: var(--card-bg); color: var(--text-muted); cursor: default; pointer-events: none; }
+
+  /* CV modal */
+  .cv-modal-body { padding: 2rem 2.5rem 2.5rem; }
+  .cv-modal-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--warm-dark); font-weight: 700; margin-bottom: 0.4rem; }
+  .cv-modal-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+  .cv-embed {
+    width: 100%; height: 520px; border: 1px solid var(--card-border);
+    border-radius: 0.5rem; background: var(--card-bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem; color: var(--text-muted); font-size: 0.9rem; text-align: center;
+    padding: 2rem;
+  }
+  .cv-embed p { line-height: 1.7; }
+  .cv-download {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem; background: var(--accent); color: var(--cream);
+    text-decoration: none; border-radius: 0.25rem;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em;
+    transition: background 0.3s; margin-top: 1.5rem;
+  }
+  .cv-download:hover { background: var(--warm-dark); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--warm-dark); }
+  #contact .section-label { color: var(--accent-light); }
+  #contact .section-title { color: var(--cream); }
+  #contact .section-line { background: var(--accent-light); }
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+  .contact-desc { font-size: 1rem; line-height: 1.85; color: rgba(240,235,225,0.6); margin-bottom: 2rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-info a { color: rgba(240,235,225,0.65); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .contact-info a:hover { color: var(--accent-light); }
+  .contact-info span { color: rgba(240,235,225,0.3); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 0.15rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,235,225,0.4); }
+  .form-group input, .form-group textarea {
+    background: rgba(240,235,225,0.06); border: 1px solid rgba(240,235,225,0.15);
+    border-radius: 0.3rem; padding: 0.85rem 1rem; color: var(--cream);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none;
+    transition: border-color 0.25s; resize: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent-light); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(240,235,225,0.22); }
+  .btn-send {
+    padding: 0.9rem 2.2rem; background: var(--accent); color: var(--cream);
+    border: none; border-radius: 0.25rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em;
+    cursor: pointer; align-self: flex-start; transition: background 0.3s, transform 0.2s;
+  }
+  .btn-send:hover { background: var(--accent-light); transform: translateY(-2px); }
+  .form-success {
+    display: none; color: var(--accent-light); font-size: 0.88rem;
+    padding: 0.8rem 1rem; border: 1px solid rgba(212,149,106,0.3);
+    border-radius: 0.3rem; background: rgba(212,149,106,0.06);
+  }
+
+  footer {
+    background: #1e1508; color: rgba(240,235,225,0.35);
+    text-align: center; padding: 1.5rem; font-size: 0.78rem; letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+  .hero-tag  { animation: fadeUp 0.6s ease both; }
+  .hero-name { animation: fadeUp 0.6s 0.15s ease both; }
+  .hero-desc { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-btns { animation: fadeUp 0.6s 0.45s ease both; }
+  .hero-right { animation: fadeUp 0.8s 0.3s ease both; }
+  .reveal { opacity:0; transform:translateY(22px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
+    .hero-right { order: -1; }
+    .photo-frame { width: 240px; height: 290px; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid, .skills-wrapper, .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .modal { margin: 0.5rem; }
+    .project-modal-body, .cv-modal-body { padding: 1.5rem; }
+  }
+  @media (max-width: 540px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">GJK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <span class="hero-tag">Software Engineer & Project Manager</span>
+    <h1 class="hero-name">Gurveender<br/><em>Jeet Kaur</em></h1>
+    <p class="hero-desc">
+      Software Engineering student at Universitas Gadjah Mada with a passion for
+      bridging business goals and technical solutions. Experienced in PM documentation,
+      team coordination, and building real-world applications.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-frame">
+      <div class="photo-wrap">
+        <img src="assets/images/profile/photo.jpeg" alt="Gurveender Jeet Kaur" onerror="this.style.display='none'; this.parentElement.style.background='var(--card-bg)'"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">Who I Am</div>
+      <h2 class="section-title">Both a Builder & a Planner</h2>
+      <div class="section-line"></div>
+      <div class="about-text">
+        <p>I'm a Software Engineering student at Universitas Gadjah Mada who thrives at the intersection of technology and project management. Whether leading a team as PM or writing code as a developer, I care about delivering work that actually solves real problems.</p>
+        <p>I've led documentation and planning for real university-level systems, participated in hackathons, and built web applications — all while actively contributing to multiple student organizations.</p>
+      </div>
+      <button class="cv-btn" onclick="openCVModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        View My CV
+      </button>
+    </div>
+    <div>
+      <div class="about-highlights">
+        <div class="highlight-card reveal">
+          <div class="num">5+</div>
+          <p>Projects delivered across PM & dev roles</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="num">6+</div>
+          <p>Organizations & committees contributed to</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="num">2026</div>
+          <p>Siemens Mobility PM Simulation — Forage</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="num">GDGoC</div>
+          <p>Mini Hackathon — Tech for Social Impact</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Bring</div>
+  <h2 class="section-title">Skills & Tools</h2>
+  <div class="section-line"></div>
+  <div class="skills-wrapper">
+    <div>
+      <div class="skill-group-title">Project Management</div>
+      <div class="skill-tags">
+        <span class="skill-tag accent reveal">Project Planning</span>
+        <span class="skill-tag accent reveal">Gantt Chart</span>
+        <span class="skill-tag accent reveal">KPI Development</span>
+        <span class="skill-tag reveal">SRS / BISREQ</span>
+        <span class="skill-tag reveal">Requirement Gathering</span>
+        <span class="skill-tag reveal">Stakeholder Communication</span>
+        <span class="skill-tag reveal">Team Leadership</span>
+        <span class="skill-tag reveal">Problem Solving & Ideation</span>
+        <span class="skill-tag reveal">Jira</span>
+        <span class="skill-tag reveal">Microsoft Office & Excel</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-title">Technical & Creative</div>
+      <div class="skill-tags">
+        <span class="skill-tag accent reveal">HTML / CSS</span>
+        <span class="skill-tag accent reveal">JavaScript</span>
+        <span class="skill-tag reveal">PHP</span>
+        <span class="skill-tag reveal">Python</span>
+        <span class="skill-tag reveal">Figma</span>
+        <span class="skill-tag reveal">Canva</span>
+        <span class="skill-tag reveal">C4 Diagram</span>
+        <span class="skill-tag reveal">Use Case & Activity Diagram</span>
+        <span class="skill-tag reveal">Data Visualization</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <h2 class="section-title">Projects</h2>
+  <div class="section-line"></div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal" onclick="openProject('ais')">
+      <div class="project-img">
+        <img src="assets/images/projects/ais.jpg" alt="AIS" onerror="this.src=''; this.parentElement.style.background='#2c2417'"/>
+        <div class="project-img-overlay"><span class="overlay-text">View Details</span></div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">Project Management</div>
+        <div class="project-name">Academic Information System</div>
+        <div class="project-tags-small">
+          <span class="project-tag-small">PM Lead</span>
+          <span class="project-tag-small">SRS / BISREQ</span>
+          <span class="project-tag-small">C4 Diagram</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" onclick="openProject('panen')">
+      <div class="project-img">
+        <img src="assets/images/projects/panen-in.jpg" alt="Panen In" onerror="this.src=''; this.parentElement.style.background='#3a5c3a'"/>
+        <div class="project-img-overlay"><span class="overlay-text">View Details</span></div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">Hustler / PM</div>
+        <div class="project-name">Panen In — Farming App</div>
+        <div class="project-tags-small">
+          <span class="project-tag-small">Hustler</span>
+          <span class="project-tag-small">KPI</span>
+          <span class="project-tag-small">In Progress</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" onclick="openProject('evently')">
+      <div class="project-img">
+        <img src="assets/images/projects/evently.png" alt="Evently" onerror="this.src=''; this.parentElement.style.background='#1a1a2e'"/>
+        <div class="project-img-overlay"><span class="overlay-text">View Details</span></div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">Full Stack Dev</div>
+        <div class="project-name">Evently — Virtual Event Organizer</div>
+        <div class="project-tags-small">
+          <span class="project-tag-small">HTML/CSS</span>
+          <span class="project-tag-small">JavaScript</span>
+          <span class="project-tag-small">PHP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" onclick="openProject('age')">
+      <div class="project-img">
+        <img src="assets/images/projects/age-calculator.png" alt="Age Calculator" onerror="this.src=''; this.parentElement.style.background='#6b3fa0'"/>
+        <div class="project-img-overlay"><span class="overlay-text">View Details</span></div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">Frontend Dev</div>
+        <div class="project-name">Age Calculator</div>
+        <div class="project-tags-small">
+          <span class="project-tag-small">HTML/CSS</span>
+          <span class="project-tag-small">JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" onclick="openProject('veen')">
+      <div class="project-img">
+        <img src="assets/images/projects/veen-moda.png" alt="Veen Moda" onerror="this.src=''; this.parentElement.style.background='#2d1b33'"/>
+        <div class="project-img-overlay"><span class="overlay-text">View Details</span></div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">PM & Dev</div>
+        <div class="project-name">Veen Moda — Textile Management</div>
+        <div class="project-tags-small">
+          <span class="project-tag-small">PHP</span>
+          <span class="project-tag-small">PM</span>
+          <span class="project-tag-small">Full Stack</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" onclick="openProject('cinema')">
+      <div class="project-img">
+        <img src="assets/images/projects/cinema-web.png" alt="Cinema Web" onerror="this.src=''; this.parentElement.style.background='#1a1200'"/>
+        <div class="project-img-overlay"><span class="overlay-text">View Details</span></div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">PM & Dev</div>
+        <div class="project-name">Cinema Web</div>
+        <div class="project-tags-small">
+          <span class="project-tag-small">JavaScript</span>
+          <span class="project-tag-small">HTML</span>
+          <span class="project-tag-small">CSS</span>
+          <span class="project-tag-small">PM</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div>
+      <div class="section-label">Let's Connect</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="section-line"></div>
+      <p class="contact-desc">Whether you have a project idea, want to collaborate, or just want to say hi — feel free to reach out!</p>
+      <div class="contact-info">
+        <div><span>Email</span><a href="mailto:gurveenderjeetkaur@gmail.com">gurveenderjeetkaur@gmail.com</a></div>
+        <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/gurveenderjeetkaur" target="_blank">linkedin.com/in/gurveenderjeetkaur</a></div>
+        <div><span>GitHub</span><a href="https://github.com/kaurgurveend" target="_blank">github.com/kaurgurveend</a></div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" required/></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" required/></div>
+      </div>
+      <div class="form-group"><label>Subject</label><input type="text" placeholder="What is this about?"/></div>
+      <div class="form-group"><label>Message</label><textarea rows="5" placeholder="Write your message here..." required></textarea></div>
+      <button type="submit" class="btn-send">Send Message</button>
+      <div class="form-success" id="formSuccess">Message sent! I'll get back to you soon.</div>
+    </form>
+  </div>
+</section>
+
+<footer>&copy; 2026 Gurveender Jeet Kaur &nbsp;&middot;&nbsp; Software Engineering, Universitas Gadjah Mada</footer>
+
+<!-- ── PROJECT MODAL ── -->
+<div class="modal-overlay" id="projectModal" onclick="closeIfOverlay(event, 'projectModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('projectModal')">&#x2715;</button>
+    <div class="project-modal-img"><img id="modalImg" src="" alt=""/></div>
+    <div class="project-modal-body">
+      <div class="project-modal-type" id="modalType"></div>
+      <div class="project-modal-name" id="modalName"></div>
+      <p class="project-modal-desc" id="modalDesc"></p>
+      <div class="project-modal-tags" id="modalTags"></div>
+      <a class="project-modal-link" id="modalLink" href="#" target="_blank">View on GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── CV MODAL ── -->
+<div class="modal-overlay" id="cvModal" onclick="closeIfOverlay(event, 'cvModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('cvModal')">&#x2715;</button>
+    <div class="cv-modal-body">
+      <div class="cv-modal-title">Gurveender Jeet Kaur</div>
+      <div class="cv-modal-sub">Software Engineering Student · Universitas Gadjah Mada · 2024–Present</div>
+      <div class="cv-embed">
+        <p>To view or download the full CV, place your CV file at:<br/><strong>assets/CV_Gurveender_Jeet_Kaur.pdf</strong></p>
+        <p style="font-size:0.82rem;">Once added, the PDF will display here automatically.</p>
+      </div>
+      <a class="cv-download" href="assets/CV_Gurveender_Jeet_Kaur.pdf" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const projects = {
+  ais: {
+    type: 'Project Management',
+    name: 'Academic Information System (AIS)',
+    img: 'assets/images/projects/ais.jpg',
+    desc: 'Led full-cycle project management for a university Academic Information System. Delivered project charter, SRS, BISREQ, Gantt chart, use case & activity diagrams, and C4 system architecture for a cross-functional team of 3 (UI/UX, Frontend, Backend).',
+    tags: ['PM Lead', 'SRS / BISREQ', 'C4 Diagram', 'Gantt Chart', 'Team of 3'],
+    link: 'https://drive.google.com/drive/folders/1Qfs4k6LTaUQuGjAIuBuvc5Er_HCUjzej',
+    linkLabel: 'View Documentation'
+  },
+  panen: {
+    type: 'Hustler / PM',
+    name: 'Panen In — Farming App',
+    img: 'assets/images/projects/panen-in.jpg',
+    desc: 'Farmer-focused mobile application. Led problem discovery, defined user pain points and solutions, established KPIs, designed the business model, and managed the product roadmap as Hustler & PM.',
+    tags: ['Hustler', 'KPI Development', 'Business Model', 'Product Roadmap', 'Dec 2025–Present'],
+    link: null,
+    linkLabel: 'In Progress'
+  },
+  evently: {
+    type: 'Full Stack Dev',
+    name: 'Evently — Virtual Event Organizer',
+    img: 'assets/images/projects/evently.png',
+    desc: 'Web platform for managing virtual events end-to-end. Features include event listing, user registration, ticketing, and a structured feedback system. Built both frontend and backend independently.',
+    tags: ['HTML/CSS', 'JavaScript', 'PHP', 'Full Stack'],
+    link: 'https://github.com/kaurgurveend',
+    linkLabel: 'View on GitHub'
+  },
+  age: {
+    type: 'Frontend Dev',
+    name: 'Age Calculator',
+    img: 'assets/images/projects/age-calculator.png',
+    desc: 'A clean, user-friendly app that calculates and displays a person\'s exact age in years, months, and days based on their birth date. Features a visual calendar-style interface.',
+    tags: ['HTML/CSS', 'JavaScript', 'UI Design'],
+    link: 'https://github.com/kaurgurveend',
+    linkLabel: 'View on GitHub'
+  },
+  veen: {
+    type: 'PM & Dev',
+    name: 'Veen Moda — Textile Management System',
+    img: 'assets/images/projects/veen-moda.png',
+    desc: 'A textile business management system designed to handle inventory tracking and business operations. Contributed as both Project Manager (documentation, planning) and developer (implementation).',
+    tags: ['PHP', 'PM', 'Full Stack', 'Inventory System'],
+    link: 'https://github.com/kaurgurveend',
+    linkLabel: 'View on GitHub'
+  },
+  cinema: {
+    type: 'PM & Dev',
+    name: 'Cinema Web',
+    img: 'assets/images/projects/cinema-web.png',
+    desc: 'A cinema web application supporting movie listings, screening schedules, and ticket booking. Acted as both Project Manager handling planning and documentation, and as a developer building the system.',
+    tags: ['JavaScript', 'PHP', 'PM', 'Full Stack'],
+    link: 'https://github.com/kaurgurveend',
+    linkLabel: 'View on GitHub'
+  }
+};
+
+function openProject(key) {
+  const p = projects[key];
+  document.getElementById('modalImg').src = p.img;
+  document.getElementById('modalImg').alt = p.name;
+  document.getElementById('modalType').textContent = p.type;
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalDesc').textContent = p.desc;
+  const tagsEl = document.getElementById('modalTags');
+  tagsEl.innerHTML = p.tags.map(t => `<span class="project-modal-tag">${t}</span>`).join('');
+  const linkEl = document.getElementById('modalLink');
+  linkEl.textContent = p.linkLabel;
+  if (p.link) {
+    linkEl.href = p.link;
+    linkEl.classList.remove('disabled');
+  } else {
+    linkEl.href = '#';
+    linkEl.classList.add('disabled');
+  }
+  document.getElementById('projectModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openCVModal() {
+  document.getElementById('cvModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeIfOverlay(e, id) {
+  if (e.target === document.getElementById(id)) closeModal(id);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal('projectModal');
+    closeModal('cvModal');
+  }
+});
+
+function submitForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-send');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    e.target.reset(); btn.textContent = 'Send Message'; btn.disabled = false;
+  }, 1200);
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
