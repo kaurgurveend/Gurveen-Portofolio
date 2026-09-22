@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gurveender Jeet Kaur, Quality Assurance & Project Management</title>
+
+<!--
+  DESIGN TOKENS (Soft Pastel, no divider lines)
+  ----------------------------------------------------
+  --bg          #FBF8F6  page background
+  --surface     #FFFFFF  cards
+  --lavender    #E4DCF5  primary accent
+  --blush       #F9DFE2  secondary accent / dev badge
+  --mint        #DCF0E6  QA badge
+  --blue        #E3EDF8  PM badge
+  --peach       #FDEBD8  highlight
+  --text        #3C3948  primary text
+  --text-soft   #6E6A7E  secondary text
+  Typography    Poppins (headings) + Inter (body)
+  Radius        cards 16px, buttons pill 999px
+  Shadow        soft, no hard lines anywhere
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#FBF8F6;
+    --surface:#FFFFFF;
+    --lavender:#E4DCF5;
+    --lavender-strong:#C9B8EE;
+    --blush:#F9DFE2;
+    --mint:#DCF0E6;
+    --mint-soft:#EFF8F3;
+    --blue:#E3EDF8;
+    --blue-soft:#F1F6FC;
+    --peach:#FDEBD8;
+    --text:#3C3948;
+    --text-soft:#6E6A7E;
+    --radius:18px;
+    --shadow:0 6px 20px rgba(60,57,72,0.06);
+    --shadow-hover:0 16px 36px rgba(60,57,72,0.12);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Inter', system-ui, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{ font-family:'Poppins', sans-serif; line-height:1.3; color:var(--text); }
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+
+  .container{ max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  section{ padding:100px 0; }
+
+  .eyebrow{
+    display:inline-block;
+    font-family:'Poppins',sans-serif;
+    font-size:12.5px; font-weight:600;
+    letter-spacing:1.5px; text-transform:uppercase;
+    color:#7E6FAE;
+    background:var(--lavender);
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+
+  h2{ font-size:30px; margin-bottom:10px; }
+  .section-desc{ color:var(--text-soft); max-width:640px; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:15px;
+    padding:13px 28px; border-radius:999px;
+    transition:all .2s ease; cursor:pointer;
+    border:none;
+  }
+  .btn-primary{ background:var(--lavender-strong); color:#2E2A44; }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:var(--shadow-hover); }
+  .btn-ghost{ background:var(--surface); color:var(--text); }
+  .btn-ghost:hover{ transform:translateY(-2px); box-shadow:var(--shadow); }
+  .btn-sm{ padding:9px 20px; font-size:13.5px; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,248,246,0.88);
+    backdrop-filter:blur(12px);
+  }
+  .nav-inner{
+    max-width:1120px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{ font-family:'Poppins',sans-serif; font-weight:600; font-size:18px; }
+  .nav-links{ display:flex; gap:30px; align-items:center; }
+  .nav-links a{ font-size:14.5px; font-weight:500; color:var(--text-soft); transition:color .2s; }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-cta{ font-size:14px; padding:10px 22px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    padding:100px 0 90px;
+  }
+  .hero-blob{
+    position:absolute; border-radius:50%; filter:blur(70px); opacity:.65; z-index:-1;
+  }
+  .blob-1{ width:360px; height:360px; background:var(--lavender); top:-90px; right:-70px; }
+  .blob-2{ width:280px; height:280px; background:var(--blush); bottom:-50px; left:-60px; }
+
+  .hero-grid{
+    display:grid; grid-template-columns:1.2fr .8fr; gap:64px; align-items:center;
+  }
+  .hero-role{
+    display:inline-block; font-family:'Poppins',sans-serif; font-weight:600;
+    font-size:13.5px; color:#7E6FAE;
+    background:var(--lavender);
+    padding:6px 14px; border-radius:999px;
+    margin-bottom:20px;
+  }
+  .hero h1{ font-size:44px; margin-bottom:12px; letter-spacing:-.5px; }
+  .hero-sub{ color:var(--text-soft); font-size:17px; font-weight:500; margin-bottom:22px; }
+  .hero p{ color:var(--text-soft); font-size:15.5px; max-width:540px; margin-bottom:32px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .hero-photo-wrap{ display:flex; justify-content:center; }
+  .hero-photo{
+    width:280px; height:340px; border-radius:24px;
+    object-fit:cover;
+    box-shadow:var(--shadow-hover);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{ display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .skill-panel{
+    background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:36px;
+  }
+  .skill-panel h3{ font-size:20px; margin-bottom:6px; }
+  .skill-panel .sub{ color:var(--text-soft); font-size:14px; margin-bottom:22px; }
+  .skill-group-title{
+    font-size:12.5px; font-weight:600; letter-spacing:.5px; text-transform:uppercase;
+    color:var(--text-soft); margin:18px 0 10px;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    font-size:13.5px; font-weight:500; padding:7px 14px; border-radius:999px;
+    background:var(--mint-soft); color:#2E5B47;
+  }
+  .chip.blue{ background:var(--blue-soft); color:#3A5E85; }
+  .chip.lav{ background:var(--lavender); color:#5B4A8F; }
+
+  /* ---------- PROJECTS ---------- */
+  section#projects{ background:var(--surface); }
+  .filters{ display:flex; gap:10px; flex-wrap:wrap; margin:28px 0 34px; }
+  .filter-btn{
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:14px;
+    padding:9px 22px; border-radius:999px; cursor:pointer;
+    background:var(--bg); color:var(--text-soft); transition:all .2s;
+    border:none;
+  }
+  .filter-btn.active{ background:var(--lavender-strong); color:#2E2A44; }
+
+  .projects-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:26px;
+    align-items:stretch;
+  }
+  .project-card{
+    background:var(--bg); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:30px; transition:all .25s; display:flex; flex-direction:column; gap:12px;
+    cursor:pointer;
+  }
+  .project-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+  .project-card.featured{
+    grid-column:1 / -1;
+    background:linear-gradient(120deg, #F7F3FC, #FDF3F5);
+  }
+  .project-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .project-cat{
+    font-size:12px; font-weight:600; padding:4px 12px; border-radius:999px;
+  }
+  .cat-qa{ background:var(--mint); color:#2E5B47; }
+  .cat-pm{ background:var(--blue); color:#3A5E85; }
+  .cat-dev{ background:var(--blush); color:#8A4A55; }
+  .project-status{ font-size:12.5px; color:var(--text-soft); margin-left:auto; }
+  .project-card h3{ font-size:18px; }
+  .project-card p{ font-size:14.5px; color:var(--text-soft); }
+  .project-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .project-tags span{
+    font-size:12px; font-weight:500; background:var(--surface); color:var(--text-soft);
+    padding:4px 10px; border-radius:8px;
+  }
+  .project-footer{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .project-linklab{ font-size:13px; font-weight:500; color:var(--text-soft); }
+  .project-detail-btn{
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:13px;
+    padding:10px 20px; border-radius:999px; cursor:pointer;
+    background:var(--surface); color:#5B4A8F; transition:all .2s;
+    border:none;
+  }
+  .project-detail-btn:hover{ background:var(--lavender); }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(60,57,72,0.4);
+    backdrop-filter:blur(5px);
+    display:none; align-items:center; justify-content:center;
+    z-index:100; padding:24px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal{
+    background:var(--surface); border-radius:24px;
+    max-width:680px; width:100%; max-height:85vh; overflow-y:auto;
+    padding:40px; position:relative; box-shadow:var(--shadow-hover);
+  }
+  .modal-close{
+    position:absolute; top:16px; right:16px;
+    width:38px; height:38px; border-radius:50%;
+    background:var(--bg); font-size:22px; line-height:1; cursor:pointer;
+    color:var(--text); transition:background .2s;
+    border:none;
+  }
+  .modal-close:hover{ background:var(--blush); }
+  .modal .m-cat{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  .modal .m-title{ font-size:23px; margin-bottom:6px; }
+  .modal .m-status{ font-size:13px; color:var(--text-soft); margin-bottom:18px; }
+  .modal .m-desc{ font-size:15px; color:var(--text-soft); margin-bottom:26px; }
+  .modal .m-role{
+    background:var(--mint-soft); border-radius:14px;
+    padding:18px 20px; margin-bottom:14px;
+  }
+  .modal .m-role.pm{ background:var(--blue-soft); }
+  .modal .m-role h4{
+    font-family:'Poppins',sans-serif; font-size:13px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;
+    color:#2E5B47;
+  }
+  .modal .m-role.pm h4{ color:#3A5E85; }
+  .modal .m-role ul li{
+    font-size:14.5px; color:var(--text-soft); position:relative;
+    padding-left:16px; margin-bottom:6px;
+  }
+  .modal .m-role ul li:last-child{ margin-bottom:0; }
+  .modal .m-role ul li::before{ content:"•"; position:absolute; left:2px; }
+  .modal .m-links{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:24px;
+  }
+  .modal .m-links a{
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px;
+    background:var(--lavender); color:#5B4A8F;
+    padding:10px 18px; border-radius:999px; transition:all .2s;
+  }
+  .modal .m-links a:hover{ background:var(--lavender-strong); color:#2E2A44; }
+  .modal .m-links .placeholder{
+    font-family:'Poppins',sans-serif; font-weight:500; font-size:13.5px;
+    background:var(--peach); color:#8A6A3A;
+    padding:10px 18px; border-radius:999px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+  .contact-links{ display:flex; flex-direction:column; gap:14px; }
+  .contact-link{
+    display:flex; align-items:center; gap:16px;
+    background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:18px 22px; transition:all .2s;
+  }
+  .contact-link:hover{ transform:translateX(4px); box-shadow:var(--shadow-hover); }
+  .contact-link .ico{
+    flex-shrink:0; width:46px; height:46px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:15px;
+    background:var(--lavender); color:#5B4A8F;
+  }
+  .contact-link .ico.li{ background:var(--blue); color:#3A5E85; }
+  .contact-link .ico.gh{ background:var(--mint); color:#2E5B47; }
+  .contact-link .ico.wa{ background:var(--blush); color:#8A4A55; }
+  .contact-link strong{ font-family:'Poppins',sans-serif; font-size:15px; display:block; }
+  .contact-link small{ font-size:13.5px; color:var(--text-soft); }
+
+  .contact-form{
+    background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:34px; display:flex; flex-direction:column; gap:15px;
+  }
+  .contact-form h3{ font-size:19px; margin-bottom:2px; }
+  .contact-form input, .contact-form textarea{
+    font-family:'Inter',sans-serif; font-size:15px; padding:13px 16px;
+    background:var(--bg);
+    color:var(--text); resize:vertical; outline:none; transition:background .2s;
+    border:none;
+  }
+  .contact-form input:focus, .contact-form textarea:focus{ background:var(--lavender); }
+  .contact-form textarea{ min-height:120px; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder{ color:#A39DAF; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:40px 0; text-align:center;
+    color:var(--text-soft); font-size:14px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .hero-grid, .skills-grid, .contact-grid{ grid-template-columns:1fr; }
+    .hero{ padding:64px 0 56px; }
+    .hero h1{ font-size:32px; }
+    .projects-grid{ grid-template-columns:1fr; }
+    .project-card.featured{ grid-column:1; }
+    .nav-links{ display:none; }
+    section{ padding:64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Gurveender Jeet Kaur</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="btn btn-primary nav-cta" href="assets/CV_Gurveender_Jeet_Kaur.pdf" target="_blank" rel="noopener">Download CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-role">Quality Assurance &amp; Project Management</div>
+      <h1>Gurveender Jeet Kaur</h1>
+      <div class="hero-sub">Software Engineering student at Universitas Gadjah Mada</div>
+      <p>
+        I work on both sides of software delivery. As a QA engineer, I write test cases,
+        automate end-to-end flows, and document bugs. As a project manager, I work on
+        requirements, planning, and team coordination. Currently QA on an ongoing academic
+        system and PM on an automated testing project for a medical app.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-ghost" href="#contact">Contact Me</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img class="hero-photo" src="assets/photo.jpeg" alt="Portrait of Gurveender Jeet Kaur" />
+    </div>
+  </div>
+</header>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="container">
+    <span class="eyebrow">Skills</span>
+    <h2>Skills &amp; Tools</h2>
+    <p class="section-desc">Quality assurance and project management are the two halves of my work.</p>
+
+    <div class="skills-grid" style="margin-top:38px">
+      <div class="skill-panel">
+        <h3>Quality Assurance</h3>
+        <p class="sub">Testing real applications: manual, automated, and API.</p>
+        <div>
+          <div class="skill-group-title">Testing</div>
+          <div class="chips">
+            <span class="chip">Manual &amp; Functional</span>
+            <span class="chip">Test Case Design</span>
+            <span class="chip">Smoke &amp; Regression</span>
+            <span class="chip">UAT</span>
+            <span class="chip">Bug Reporting</span>
+          </div>
+          <div class="skill-group-title">Automation &amp; API</div>
+          <div class="chips">
+            <span class="chip">Playwright</span>
+            <span class="chip">Appium (Android)</span>
+            <span class="chip">Cucumber BDD</span>
+            <span class="chip">Page Object Model</span>
+            <span class="chip">Postman, REST API</span>
+          </div>
+          <div class="skill-group-title">Tools</div>
+          <div class="chips">
+            <span class="chip lav">Jira</span>
+            <span class="chip lav">Notion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-panel">
+        <h3>Project Management</h3>
+        <p class="sub">Planning, documentation, and team coordination.</p>
+        <div>
+          <div class="skill-group-title">Planning &amp; Documentation</div>
+          <div class="chips">
+            <span class="chip blue">SRS / BISREQ</span>
+            <span class="chip blue">Project Planning</span>
+            <span class="chip blue">Gantt Chart</span>
+            <span class="chip blue">KPI Development</span>
+            <span class="chip blue">C4 &amp; UML Diagrams</span>
+          </div>
+          <div class="skill-group-title">Agile / Scrum</div>
+          <div class="chips">
+            <span class="chip blue">Sprint Planning</span>
+            <span class="chip blue">Backlog Management</span>
+            <span class="chip blue">Daily Standup</span>
+          </div>
+          <div class="skill-group-title">Tools &amp; Soft Skills</div>
+          <div class="chips">
+            <span class="chip blue">Jira</span>
+            <span class="chip blue">Notion</span>
+            <span class="chip blue">MS Office &amp; Excel</span>
+            <span class="chip blue">Stakeholder Communication</span>
+            <span class="chip blue">Team Coordination</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="container">
+    <span class="eyebrow">Projects</span>
+    <h2>Selected Work</h2>
+    <p class="section-desc">Click a project to see my role in detail and open the work itself.</p>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="qa">QA</button>
+      <button class="filter-btn" data-filter="pm">Project Management</button>
+      <button class="filter-btn" data-filter="dev">Development</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <article class="project-card featured" data-cat="qa" data-cat2="pm" onclick="openProject('dental')">
+        <div class="project-top">
+          <span class="project-cat cat-qa">QA &amp; Automation</span>
+          <span class="project-cat cat-pm">PM</span>
+          <span class="project-status">PPPL Final Project, 2026</span>
+        </div>
+        <h3>E2E Automated Testing for Tentang Dental</h3>
+        <p>Automated testing of a dental clinic Android app using Cucumber BDD and Appium. 17 scenarios ran and 6 bugs were found, including a critical security issue.</p>
+        <div class="project-tags">
+          <span>Java 17</span><span>Appium</span><span>Cucumber BDD</span><span>Maven</span><span>TestNG</span><span>Page Object Model</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-linklab">QA + PM roles</span>
+          <button class="project-detail-btn">View Details</button>
+        </div>
+      </article>
+
+      <article class="project-card" data-cat="qa" onclick="openProject('simatkul')">
+        <div class="project-top">
+          <span class="project-cat cat-qa">QA &amp; Functional Testing</span>
+          <span class="project-status">In Progress</span>
+        </div>
+        <h3>SIMATKUL: Course Management System</h3>
+        <p>QA for an active academic system that manages courses and assignments.</p>
+        <div class="project-tags">
+          <span>Test Case Design</span><span>UAT</span><span>Bug Tracking</span><span>Notion</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-linklab">QA role</span>
+          <button class="project-detail-btn">View Details</button>
+        </div>
+      </article>
+
+      <article class="project-card" data-cat="pm" onclick="openProject('ais')">
+        <div class="project-top">
+          <span class="project-cat cat-pm">Project Management</span>
+          <span class="project-status">University Project</span>
+        </div>
+        <h3>AIS: Academic Information System</h3>
+        <p>Led planning and requirements for a university information system.</p>
+        <div class="project-tags">
+          <span>SRS / BISREQ</span><span>C4 Diagram</span><span>Use Case &amp; Activity</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-linklab">PM role</span>
+          <button class="project-detail-btn">View Details</button>
+        </div>
+      </article>
+
+      <article class="project-card" data-cat="pm" data-cat2="dev" onclick="openProject('veenmoda')">
+        <div class="project-top">
+          <span class="project-cat cat-pm">PM &amp; Full-Stack</span>
+          <span class="project-status">Shipped</span>
+        </div>
+        <h3>Veen Moda: Textile Stock Management</h3>
+        <p>Stock management system for a fabric store built with Laravel.</p>
+        <div class="project-tags">
+          <span>Laravel</span><span>PHP</span><span>Blade</span><span>MySQL</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-linklab">PM + Dev roles</span>
+          <button class="project-detail-btn">View Details</button>
+        </div>
+      </article>
+
+      <article class="project-card" data-cat="dev" onclick="openProject('evently')">
+        <div class="project-top">
+          <span class="project-cat cat-dev">Full-Stack Development</span>
+          <span class="project-status">Shipped</span>
+        </div>
+        <h3>Evently: Virtual Event Organizer</h3>
+        <p>Web app to create, manage, and join virtual events.</p>
+        <div class="project-tags">
+          <span>HTML/CSS</span><span>JavaScript</span><span>PHP</span><span>Bootstrap</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-linklab">Development role</span>
+          <button class="project-detail-btn">View Details</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h2>Get in touch</h2>
+    <p class="section-desc">For opportunities, internships, or questions, reach out through any of the channels below.</p>
+
+    <div class="contact-grid" style="margin-top:38px">
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:gurveenderjeetkaur@gmail.com">
+          <div class="ico">E</div>
+          <div><strong>Email</strong><small>gurveenderjeetkaur@gmail.com</small></div>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/gurveenderjeetkaur" target="_blank" rel="noopener">
+          <div class="ico li">in</div>
+          <div><strong>LinkedIn</strong><small>linkedin.com/in/gurveenderjeetkaur</small></div>
+        </a>
+        <a class="contact-link" href="https://github.com/kaurgurveend" target="_blank" rel="noopener">
+          <div class="ico gh">GH</div>
+          <div><strong>GitHub</strong><small>github.com/kaurgurveend</small></div>
+        </a>
+        <a class="contact-link" href="https://wa.me/6281269484827" target="_blank" rel="noopener">
+          <div class="ico wa">WA</div>
+          <div><strong>WhatsApp</strong><small>+62 812-6948-4827</small></div>
+        </a>
+      </div>
+
+      <form class="contact-form" onsubmit="return false;">
+        <h3>Send a message</h3>
+        <input type="text" placeholder="Your name" />
+        <input type="email" placeholder="Your email" />
+        <textarea placeholder="Write your message here..."></textarea>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    © 2026 Gurveender Jeet Kaur, Quality Assurance &amp; Project Management, Universitas Gadjah Mada
+  </div>
+</footer>
+
+<!-- ================= MODAL ================= -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  /* ---------- Project detail data ---------- */
+  const PROJECTS = {
+    dental: {
+      cat: '<span class="project-cat cat-qa">QA &amp; Automation</span><span class="project-cat cat-pm">PM</span>',
+      title: 'E2E Automated Testing for Tentang Dental',
+      status: 'PPPL Final Project, 2026, team of 3',
+      desc: 'End-to-end automated testing of a dental clinic Android app covering authentication, patient list, X-ray upload, and examination history, built with Cucumber BDD and Appium using the Page Object Model.',
+      roles: [
+        { cls: 'qa', name: 'As QA', points: [
+          'Wrote test cases for Login, Register & Profile (page objects, step definitions, feature files)',
+          'Ran 17 automated scenarios, with 11 passed and 6 bugs found, including a critical security flaw in the change-password flow',
+          'Published a structured bug report with severity levels and reproduction steps'
+        ]},
+        { cls: 'pm', name: 'As PM', points: [
+          'Coordinated a 3-person team and structured the work across separate branches',
+          'Planned scope, integrated the test runners, and kept the team on the final deadline',
+          'Maintained the project documentation seen in the link below'
+        ]}
+      ],
+      links: [
+        { label: 'GitHub repository', href: 'https://github.com/itzveen/Testing---Tentang-Dental' },
+        { label: 'Bug report (bug_report.md)', href: 'https://github.com/itzveen/Testing---Tentang-Dental/blob/zizah-testing/bug_report.md' },
+        { label: 'PM documentation (Google Drive)', href: 'https://drive.google.com/drive/folders/1EfZAvEr1rVuz1b4Zk1KzWG0Py_WpkP8r?usp=sharing' }
+      ]
+    },
+    simatkul: {
+      cat: '<span class="project-cat cat-qa">QA &amp; Functional Testing</span>',
+      title: 'SIMATKUL: Course Management System',
+      status: 'Ongoing',
+      desc: 'Quality assurance for an active academic information system that manages courses and assignments.',
+      roles: [
+        { cls: 'qa', name: 'As QA', points: [
+          'Writing functional and UAT test cases for course and assignment features',
+          'Tracking and reporting bugs to the development team',
+          'Keeping test documentation up to date in Notion and Google Drive'
+        ]}
+      ],
+      links: [
+        { label: 'Test Plan (Notion)', href: 'https://app.notion.com/p/Test-Plan-SIMATKUL-3d6d16b4122b8186a36bfba121ceab98?source=copy_link' },
+        { label: 'Files (Google Drive)', href: 'https://drive.google.com/drive/folders/1XpW9iEZFjrbBQbZUiFbvhh-Swofxw0uE?usp=drive_link' }
+      ]
+    },
+    ais: {
+      cat: '<span class="project-cat cat-pm">Project Management</span>',
+      title: 'AIS: Academic Information System',
+      status: 'University Project',
+      desc: 'Led the planning and requirements phase of a university information system.',
+      roles: [
+        { cls: 'pm', name: 'As PM', points: [
+          'Owned the SRS and BISREQ documentation',
+          'Designed the C4 architecture along with use case and activity diagrams',
+          'Gathered requirements and coordinated with stakeholders'
+        ]}
+      ],
+      links: [
+        { label: 'Documentation (Google Drive)', href: 'https://drive.google.com/drive/folders/1e7DUeeaCI9b7JcUTW-FPrr254dWP5LPX?usp=sharing' }
+      ]
+    },
+    veenmoda: {
+      cat: '<span class="project-cat cat-pm">PM &amp; Full-Stack</span>',
+      title: 'Veen Moda: Textile Stock Management',
+      status: 'Shipped',
+      desc: 'Stock management system for a fabric store with multi-role authentication, inventory tracking, and activity logging.',
+      roles: [
+        { cls: 'pm', name: 'As PM', points: [
+          'Planned the build cycle and prioritized features with the team'
+        ]},
+        { cls: 'pm', name: 'As Developer', points: [
+          'Built the application with Laravel (PHP, Blade, MySQL)'
+        ]}
+      ],
+      links: [
+        { label: 'GitHub repository', href: 'https://github.com/kaurgurveend/Management-System---Veen-Moda' }
+      ]
+    },
+    evently: {
+      cat: '<span class="project-cat cat-dev">Full-Stack Development</span>',
+      title: 'Evently: Virtual Event Organizer',
+      status: 'Shipped',
+      desc: 'Web application for creating, managing, and joining virtual events.',
+      roles: [
+        { cls: 'pm', name: 'As Developer', points: [
+          'Built event registration, ticketing, host management, and participant feedback',
+          'Implemented with HTML/CSS, JavaScript, PHP, and Bootstrap'
+        ]}
+      ],
+      links: [
+        { label: 'GitHub repository', href: 'https://github.com/kaurgurveend/Evently-Website' }
+      ]
+    }
+  };
+
+  /* ---------- Modal ---------- */
+  const overlay = document.getElementById('projectModal');
+  const body = document.getElementById('modalBody');
+  const closeBtn = document.getElementById('modalClose');
+
+  function openProject(id) {
+    const p = PROJECTS[id];
+    if (!p) return;
+
+    const rolesHtml = p.roles.map(r => `
+      <div class="m-role ${r.cls}">
+        <h4>${r.name}</h4>
+        <ul>${r.points.map(pt => `<li>${pt}</li>`).join('')}</ul>
+      </div>
+    `).join('');
+
+    const linksHtml = p.links.map(l => {
+      if (l.placeholder) {
+        return `<span class="placeholder">${l.label}</span>`;
+      }
+      return `<a href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`;
+    }).join('');
+
+    body.innerHTML = `
+      <div class="m-cat">${p.cat}</div>
+      <h3 class="m-title">${p.title}</h3>
+      <div class="m-status">${p.status}</div>
+      <p class="m-desc">${p.desc}</p>
+      ${rolesHtml}
+      <div class="m-links">${linksHtml}</div>
+    `;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProject() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeProject);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeProject(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProject(); });
+
+  document.querySelectorAll('.project-detail-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => e.stopPropagation());
+  });
+
+  /* ---------- Filter ---------- */
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.project-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const cats = [card.dataset.cat, card.dataset.cat2].filter(Boolean);
+        const show = filter === 'all' || cats.includes(filter);
+        card.style.display = show ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
